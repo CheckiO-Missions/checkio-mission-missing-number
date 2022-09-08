@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    You are given {% if is_js %}an Array of numbers{% else %}a list of integers{% endif %}, 
+    which are elements of arithmetic progression - the difference between the consecutive elements is constant.
+    But this {% if is_js %}Array{% else %}list{% endif %} is unsorted and one element
+    is missing...good luck!
+
+</p>
+
+<!-- Explain input and output values -->
+<p>
+    <strong>Input:</strong> {% if is_js %}Array of numbers{% else %}List of integers{% endif %}.
+</p>
+
+<p>
+    <strong>Output: </strong> {% if is_js %}Number{% else %}Integer{% endif %}. 
+</p>
+
+
+<p>
+    <strong>Examples:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<p>
+    <strong>Precondition:</strong>
+    <li><i>length of sequence > 2</i></li>
+</p>

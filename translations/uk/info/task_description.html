@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    Тобі дано {% if is_js %}масив{% else %}список{% endif %} цілих чисел, що є
+    елементами арифметичної прогресії - різниця між сусідніми елементами постійна.
+    Але цей {% if is_js %}масив{% else %}список{% endif %} не сортований і один
+    елемент відсутній...удачі!
+
+</p>
+
+<!-- Explain input and output values -->
+<p>
+    <strong>Вхідні дані:</strong> {% if is_js %}Масив{% else %}Список{% endif %} цілих чисел.
+</p>
+
+<p>
+    <strong>Вихідні дані:</strong> Ціле число. 
+</p>
+
+
+<p>
+    <strong>Приклади:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<p>
+    <strong>Передумова:</strong>
+    <li><i>довжина сукупності > 2</i></li>
+</p>
