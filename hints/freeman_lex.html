@@ -1,0 +1,167 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <i>I have no idea how to start solving this mission.</i>
+    </div>
+    <div class="answer">
+        <p>
+            💡 For the solution I offer you, the idea is the following. Since the difference between every two adjacent numbers in the arithmetic progression is constant, you need to check every three elements in the sorted initial list and find the "gap" - where the differences between elements in two adjacent pairs in a triplet are not equal.  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Ok, what should I start from?</i>
+    </div>
+    <div class="answer">
+        <p>
+            To perform the idea, your list should be sorted. Make in-place sorting with <a target="_blank" href="https://www.w3schools.com/python/ref_list_sort.asp">sort()</a> list method.
+        </p>
+        <pre class="brush: python">
+items.sort()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            How to get every three adjacent elements of the list?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Using <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a>, iterate over the elements of the list, taking their indexes from the <a target="_blank" href="https://www.w3schools.com/python/ref_func_range.asp">range()</a> function.
+        </p>
+        <pre class="brush: python">
+for i in range(...):
+    ...
+        </pre>
+        <p>
+            Since you are going to work with three adjacent elements inside loop and in order to avoid generating indexes, which are out of the list, you need to iterate not to the very end of the list, but two elements less.
+        </p>
+        <p>
+            How to do so? You need to find the length of the list with built-in <a target="_blank" href="https://www.w3schools.com/python/ref_func_len.asp">len()</a> function and subtract <b class="code">2</b> from it. Use the result as an argument of <b class="code">range()</b>.
+        </p>
+        <pre class="brush: python">
+for i in range(len(items) - 2):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            How to get values of three adjacent elements of the list?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            To make your solution more readable, let's create three variables <b class="code">f</b>irst, <b class="code">s</b>econd and <b class="code">t</b>hird. Use <a target="_blank" href="https://www.w3schools.com/python/python_tuples_unpack.asp">unpacking</a> and <a target="_blank" href="https://railsware.com/blog/python-for-machine-learning-indexing-and-slicing-for-lists-tuples-strings-and-other-sequential-types/">slicing</a> to assign values of three adjacent elements from the list to the variables. 
+        </p>
+        <pre class="brush: python">
+f, s, t = items[i: i + 3]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            How exactly to perform checking of differences?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Well, it's ease. Using <a target="_blank" href="https://docs.python.org/3/tutorial/controlflow.html">if statement</a> and <a target="_blank" href="https://www.w3schools.com/python/python_operators.asp">not equal (!=)</a> operator, compare differences between two pairs of variables.
+        </p>
+        <pre class="brush: python">
+if t - s != s - f:
+    ...
+        </pre>
+        <p>
+            Our list is sorted ascending (first element among three is the smallest, third - biggest), so both differences are positive.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            How to find the missing element?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            If the previous condition is <b class="code">True</b> (the "gap" is found), you need to subtract the difference <b class="code">s - f</b> from <b class="code">t</b>.
+        </p>
+        <pre class="brush: python">
+t - (s - f)
+        </pre>
+        <p>
+            So, why does it work? For example, you have a sorted list <b class="code">[1, 2, 4]</b>. If you subtract from <b class="code">4</b> "normal" step for this progression <b class="code">2 - 1 == 1</b>, you receive a correct answer <b class="code">4 - 1 == 3</b>.
+        </p>
+        <p>
+            But it also works, if the "gap" is between second and first elements! You have a list <b class="code">[1, 3, 4]</b>. If you make necessary subtractions - <b class="code">4 - (3 - 1) == 4 - 2 == 2</b>, you receive a correct answer again!  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>So, how my final solution should look like?</i>
+    </div>
+    <div class="answer">
+        <p>
+            You just need to wrap your code into function expression, join all statements above and return the result of the last expression with subtractions. 
+        </p>
+        <p>Here is the whole solution:</p>
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    items.sort()
+    for i in range(len(items) - 2):
+        f, s, t = items[i: i + 3]
+        if t - s != s - f:
+            return t - (s - f)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Python Ninnjaa!</i>
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            In this solution you find the step and iterate over the correct progression. If an element of the progression is not present in the initial list - it's the answer.
+        </p>
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    first, *_, last = sorted(items)
+    step = (last - first) // len(items)
+    for i in range(first+step, last, step):
+        if i not in items:
+            return i
+        </pre>
+        <p>
+            The sum of some number of elements of progression may be counted by the formula. So the difference between this sum and the sum of elements of the initial list is the missing element. 
+        </p>
+        <pre class="brush: python">
+def missing_number(items: List[int]) -> int:   
+
+    first, *_, last = sorted(items)
+    total = (first + last) * (len(items) + 1) // 2
+
+    return total - sum(items)
+        </pre>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Thanks! I know and understand more now! Everything works fine!</i>
+    </div>
+    <div class="answer">
+        👍 Glad to hear it!
+    </div>
+</div>
+</body>
