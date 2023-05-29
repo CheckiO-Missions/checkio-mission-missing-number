@@ -1,18 +1,18 @@
 <!-- Describe task in general -->
 
 <p>
-    On vous donne {% if is_js %}un tableau <span>(array)</span> de nombres <span>(numbers)</span>{% else %} une liste <span>(list)</span> d'entiers <span>(integers)</span>{% endif %} , qui sont des éléments de la progression arithmétique - la différence entre les éléments consécutifs est constante.
-    Mais ce tableau {% if is_js %} <span>(array)</span> {% else %} liste <span>(list)</span>{% endif %} n'est pas trié et il manque un élément...bonne chance!
+    On vous donne {% if is_js %}un tableau <span>(array)</span> de nombres <span>(numbers)</span>{% else %}une liste <span>(list)</span> d'entiers <span>(integers)</span>{% endif %}, qui sont des éléments de la progression arithmétique - la différence entre les éléments consécutifs est constante.
+    Mais ce {% if is_js %}tableau <span>(array)</span>{% else %}liste <span>(list)</span>{% endif %} n'est pas trié et il manque un élément...bonne chance!
 
 </p>
 
 <!-- Explain input and output values -->
 <p>
-   <strong>Entrée:</strong> {% if is_js %}Tableau <span>(Array)</span> de nombres <span>(numbers)</span>{% else %} Liste <span>(List)</span> d'entiers <span>(integers)</span>{% endif %}.
+   <strong>Entrée:</strong> {% if is_js %}Tableau <span>(array)</span> de nombres <span>(numbers)</span>{% else %}Liste <span>(list)</span> d'entiers <span>(integers)</span>{% endif %}.
 </p>
 
 <p>
-   <strong>Sortie:</strong> {% if is_js %}Nombre <span>(Number)</span>{% else %} Entier <span>(Integer)</span>{% endif %}. 
+   <strong>Sortie:</strong> {% if is_js %}Nombre <span>(number)</span>{% else %}Entier <span>(integer)</span>{% endif %}. 
 </p>
 
 
