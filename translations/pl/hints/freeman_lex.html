@@ -1,0 +1,173 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>Nie mam pojęcia, jak zacząć rozwiązywać tę misję.</p>
+    </div>
+    <div class="answer">
+        <p>
+            w przypadku rozwiązania, które Panu proponuję, pomysł jest następujący. Ponieważ różnica między każdymi dwiema sąsiednimi liczbami w postępie arytmetycznym jest stała, musi Pan sprawdzić każde trzy elementy na posortowanej liście początkowej i znaleźć "lukę" - gdzie różnice między elementami w dwóch sąsiednich parach w triplecie nie są równe.  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, od czego powinienem zacząć?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Aby wykonać ten pomysł, Państwa lista powinna być posortowana. Proszę wykonać sortowanie w miejscu za pomocą metody listy <a target="_blank" href="https://www.w3schools.com/python/ref_list_sort.asp">sort()</a>.
+        </p>
+        <pre class="brush: python">
+items.sort()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak uzyskać co trzy sąsiadujące elementy listy?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Za pomocą funkcji <a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a> proszę iterować po elementach listy, pobierając ich indeksy z funkcji <a target="_blank" href="https://www.w3schools.com/python/ref_func_range.asp">range()</a>.
+        </p>
+        <pre class="brush: python">
+for i in range(...):
+    ...
+        </pre>
+        <p>
+            Ponieważ będą Państwo pracować z trzema sąsiadującymi elementami wewnątrz pętli i aby uniknąć generowania indeksów, które są poza listą, należy iterować nie do samego końca listy, ale o dwa elementy mniej.
+        </p>
+        <p>
+            Jak to zrobić? Proszę znaleźć długość listy za pomocą wbudowanej funkcji <a target="_blank" href="https://www.w3schools.com/python/ref_func_len.asp">len()</a> i odjąć od niej <b class="code">2</b>. Wynik proszę wykorzystać jako argument funkcji <b class="code">range()</b>.
+        </p>
+        <pre class="brush: python">
+for i in range(len(items) - 2):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak uzyskać wartości trzech sąsiadujących elementów listy?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Aby rozwiązanie było bardziej czytelne, proszę utworzyć trzy zmienne <b class="code">f</b>irst, <b class="code">s</b>econd i <b class="code">t</b>hird. Proszę użyć <a target="_blank" href="https://www.w3schools.com/python/python_tuples_unpack.asp">unpacking</a> i <a target="_blank" href="https://railsware.com/blog/python-for-machine-learning-indexing-and-slicing-for-lists-tuples-strings-and-other-sequential-types/">slicing</a>, aby przypisać wartości trzech sąsiadujących elementów z listy do zmiennych. 
+        </p>
+        <pre class="brush: python">
+f, s, t = items[i: i + 3]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak dokładnie przeprowadzić sprawdzanie różnic?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Cóż, to proste. Za pomocą operatorów <a target="_blank" href="https://docs.python.org/3/tutorial/controlflow.html">if statement</a> i <a target="_blank" href="https://www.w3schools.com/python/python_operators.asp">not equal (!=)</a> proszę porównać różnice między dwiema parami zmiennych.
+        </p>
+        <pre class="brush: python">
+if t - s!= s - f:
+    ...
+        </pre>
+        <p>
+            Nasza lista jest posortowana rosnąco (pierwszy element z trzech jest najmniejszy, trzeci - największy), więc obie różnice są dodatnie.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak znaleźć brakujący element?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Jeśli poprzedni warunek to <b class="code">True</b> ("luka" została znaleziona), należy odjąć różnicę <b class="code">s - f</b> od <b class="code">t</b>.
+        </p>
+        <pre class="brush: python">
+t - (s - f)
+        </pre>
+        <p>
+            Dlaczego więc to działa? Na przykład, mają Państwo posortowaną listę <b class="code">[1, 2, 4]</b>. Jeśli odejmie Pan od <b class="code">4</b> "normalny" krok dla tej progresji <b class="code">2 - 1 == 1</b>, otrzyma Pan poprawną odpowiedź <b class="code">4 - 1 == 3</b>.
+        </p>
+        <p>
+            Ale działa to również, jeśli "luka" znajduje się między drugim a pierwszym elementem! Mają Państwo listę <b class="code">[1, 3, 4]</b>. Jeśli wykonają Państwo niezbędne odejmowanie - <b class="code">4 - (3 - 1) == 4 - 2 == 2</b>, ponownie otrzymają Państwo poprawną odpowiedź!  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Jak więc powinno wyglądać moje ostateczne rozwiązanie?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Wystarczy zawinąć kod w wyrażenie funkcyjne, połączyć wszystkie powyższe instrukcje i zwrócić wynik ostatniego wyrażenia z odejmowaniem. 
+        </p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    items.sort()
+    for i in range(len(items) - 2):
+        f, s, t = items[i: i + 3]
+        if t - s!= s - f:
+            return t - (s - f)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwym 🥇 Python Ninnjaa!</p>
+    </div>
+    <div class="answer">
+        <p>Jasne, proszę łapać!</p>
+        <p>
+            W tym rozwiązaniu znajduje Pan krok i iteruje po poprawnej progresji. Jeśli element progresji nie znajduje się na początkowej liście - jest to odpowiedź.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    first, *_, last = sorted(items)
+    step = (last - first) // len(items)
+    for i in range(first+step, last, step):
+        if i not in items:
+            return i
+        </pre>
+        </div>
+        <p>
+            Suma pewnej liczby elementów progresji może być policzona przez formułę. Różnica między tą sumą a sumą elementów początkowej listy jest brakującym elementem. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: List[int]) -> int:   
+
+    first, *_, last = sorted(items)
+    total = (first + last) * (len(items) + 1) // 2
+
+    return total - sum(items)
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa dobrze!</p>
+    </div>
+    <div class="answer">
+        miło mi to słyszeć!
+    </div>
+</div>
+</body>
