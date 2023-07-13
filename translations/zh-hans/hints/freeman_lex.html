@@ -1,0 +1,173 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>我不知道如何开始解决这项任务。</p>
+    </div>
+    <div class="answer">
+        <p>
+            💡 我为您提供的解决方案的思路如下。由于在算术级数中每两个相邻数之间的差是恒定的，您需要检查排序的初始列表中的每三个元素，并找到 "差距"--在一个三元组中两个相邻对的元素之间的差不相等。  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>好的，我应该从哪里开始呢？</p>
+    </div>
+    <div class="answer">
+        <p>
+            为了实现这个想法，您的列表应该排序。使用<a target="_blank" href="https://www.w3schools.com/python/ref_list_sort.asp">sort()</a> list 方法进行就地排序。
+        </p>
+        <pre class="brush: python">
+items.sort()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何获取列表中每三个相邻元素？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            使用<a target="_blank" href="https://www.w3schools.com/python/python_for_loops.asp">for loop</a>, 遍历列表中的元素，从<a target="_blank" href="https://www.w3schools.com/python/ref_func_range.asp">range()</a> 函数中获取它们的索引。
+        </p>
+        <pre class="brush: python">
+for i in range(...):
+    ...
+        </pre>
+        <p>
+            由于您将在循环中处理三个相邻的元素，为了避免产生超出列表的索引，您需要遍历的不是列表的最末端，而是少两个元素。
+        </p>
+        <p>
+            如何做到这一点呢？你需要用内置的<a target="_blank" href="https://www.w3schools.com/python/ref_func_len.asp">len()</a> 函数求出列表的长度，然后减去<b class="code">2</b> 。将结果作为<b class="code">range()</b> 的参数。
+        </p>
+        <pre class="brush: python">
+for i in range(len(items) - 2):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何获取列表中相邻三个元素的值？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            为了使您的解决方案更易读，让我们创建三个变量<b class="code">f</b>irst,<b class="code">s</b>econd 和<b class="code">t</b>hird。使用<a target="_blank" href="https://www.w3schools.com/python/python_tuples_unpack.asp">unpacking</a> 和<a target="_blank" href="https://railsware.com/blog/python-for-machine-learning-indexing-and-slicing-for-lists-tuples-strings-and-other-sequential-types/">slicing</a> 将列表中相邻三个元素的值赋值给变量。 
+        </p>
+        <pre class="brush: python">
+f, s, t = items[i: i + 3]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何进行差值检查？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            很简单。使用<a target="_blank" href="https://docs.python.org/3/tutorial/controlflow.html">if statement</a> 和<a target="_blank" href="https://www.w3schools.com/python/python_operators.asp">not equal (!=)</a> 操作符，比较两对变量之间的差异。
+        </p>
+        <pre class="brush: python">
+if t - s!= s - f:
+    ...
+        </pre>
+        <p>
+            我们的列表是升序排序的（三个元素中第一个元素最小，第三个元素最大），所以两个差值都是正数。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何找到缺少的元素？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            如果前一个条件是<b class="code">True</b> ("缺口 "被找到), 您需要从<b class="code">t</b> 减去差值<b class="code">s - f</b>.
+        </p>
+        <pre class="brush: python">
+t - (s - f)
+        </pre>
+        <p>
+            那么，为什么它可以工作呢？例如，您有一个排序列表<b class="code">[1, 2, 4]</b> 。如果您从<b class="code">4</b> 中减去 "正常 "步骤<b class="code">2 - 1 == 1</b> ，您将得到一个正确的答案<b class="code">4 - 1 == 3</b> 。
+        </p>
+        <p>
+            但是，如果 "间隙 "在第二个元素和第一个元素之间，它也是有效的！您有一个列表<b class="code">[1, 3, 4]</b> 。如果您做必要的减法 -<b class="code">4 - (3 - 1) == 4 - 2 == 2</b>, 您将再次得到正确的答案！  
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>那么，我的最终解决方案应该是怎样的呢？</p>
+    </div>
+    <div class="answer">
+        <p>
+            您只需将您的代码封装为函数表达式，连接上述所有语句，并返回最后一个表达式的减法结果。 
+        </p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    items.sort()
+    for i in range(len(items) - 2):
+        f, s, t = items[i: i + 3]
+        if t - s!= s - f:
+            return t - (s - f)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>告诉我更多的解决方案！<br />
+        因为我想成为一个真正的 🥇 Python Ninnjaa！</p>
+    </div>
+    <div class="answer">
+        <p>当然，抓住它！</p>
+        <p>
+            在这个解决方案中，你要找到步长并遍历正确的级数。如果在初始列表中不存在递进的元素，它就是答案。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: list[int]) -> int:
+
+    first, *_, last = sorted(items)
+    step = (last - first) // len(items)
+    for i in range(first+step, last, step):
+        if i not in items:
+            return i
+        </pre>
+        </div>
+        <p>
+            在公式中可以计算出一定数量的级数元素之和。因此，这个总和与初始列表中元素总和的差值就是缺少的元素。 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def missing_number(items: List[int]) -> int:   
+
+    first, *_, last = sorted(items)
+    total = (first + last) * (len(items) + 1) // 2
+
+    return total - sum(items)
+        </pre>
+        </div>
+        <p>点击任务菜单<b>Best Solutions</b> ，查看更多有趣的解决方案！</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>谢谢！现在我知道并理解了更多！一切正常！</p>
+    </div>
+    <div class="answer">
+        很高兴听到这个消息！
+    </div>
+</div>
+</body>
