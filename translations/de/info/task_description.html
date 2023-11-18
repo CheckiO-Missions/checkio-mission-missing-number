@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    Sie erhalten eine Folge von ganzen Zahlen, die Elemente einer arithmetischen Progression sind - die Differenz zwischen den aufeinanderfolgenden Elementen ist konstant.
+    Aber diese Folge ist unsortiert und es fehlt ein Element... Viel Glück!
+</p>
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}missing-number.png" alt="example" style="max-height: 300px"/>
+</p>
+<!-- Explain input and output values -->
+<p>
+   <strong>Eingabe:</strong> {% if is_js %}Array{% else %}Liste{% endif %} <span>({% if is_js %}Array{% else %}List{% endif %})</span> von ganzen Zahlen <span>{% if is_js %}(number){% else %}(int){% endif %}</span>.
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> Eine ganze Zahl <span>{% if is_js %}(number){% else %}(int){% endif %}</span>. 
+</p>
+
+
+<p>
+    <strong>Beispiele:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<p>
+    <strong>Vorbedingungen:</strong>
+    <li><i>länge der Sequenz &gt; 2;</i></li>
+    <li><i>das fehlende Element liegt immer zwischen zwei Elementen der Sequenz.</i></li>
+</p>
