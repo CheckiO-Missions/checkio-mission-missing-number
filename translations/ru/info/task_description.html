@@ -1,0 +1,30 @@
+<!-- Describe task in general -->
+
+<p>
+    Вам дана последовательность целых чисел, которые являются элементами арифметической прогрессии - разница между последовательными элементами постоянна.
+    Но эта последовательность не отсортирована, и один элемент отсутствует... удачи!
+</p>
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}missing-number.png" alt="example" style="max-height: 300px"/>
+</p>
+<!-- Explain input and output values -->
+<p>
+    <strong>Ввод:</strong> <span translate="repeat">{% if is_js %}Array{% else %}Список{% endif %}</span> целых чисел <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span>.
+</p>
+
+<p>
+    <strong>Вывод:</strong> Целое число <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span>.
+</p>
+
+
+<p>
+    <strong>Примеры:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<p>
+    <strong>Предварительные условия:</strong>
+    <li><i>длина последовательности > 2;</i></li>
+    <li><i>отсутствующий элемент всегда находится между двумя элементами в последовательности.</i></li>
+</p>
